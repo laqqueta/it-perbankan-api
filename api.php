@@ -50,11 +50,13 @@ if ($method == 'GET') {
     //$endpoint = $uri[count($uri) - 1];
 
     $endpoint = $uri;
-    echo $endpoint;
-    die();
+
     // For running in localhost change /transfer to transfer
     if($endpoint == '/transfer') {
         $jsonData = json_decode(file_get_contents('php://input'));
+
+        echo $endpoint;
+        die();
 
         $fromAccount = $jsonData->fromAccount ?? ($_POST['fromAccount'] ?? '');
         $toAccount = $jsonData->toAccount ?? ($_POST['toAccount'] ?? '');
