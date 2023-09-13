@@ -1,6 +1,6 @@
 <?php
-require_once 'Account.php';
-require_once 'Transactions.php';
+require_once 'api/Account.php';
+require_once 'api/Transactions.php';
 
 header('Content-Type: application/json');
 
