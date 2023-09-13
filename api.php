@@ -14,10 +14,6 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 $uri = $_SERVER['PATH_INFO'];
 
-echo $uri;
-
-die();
-
 $transaction = new Transactions();
 $account = new Account();
 
@@ -54,7 +50,8 @@ if ($method == 'GET') {
     //$endpoint = $uri[count($uri) - 1];
 
     $endpoint = $uri;
-
+    echo $endpoint;
+    die();
     // For running in localhost change /transfer to transfer
     if($endpoint == '/transfer') {
         $jsonData = json_decode(file_get_contents('php://input'));
