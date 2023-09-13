@@ -55,9 +55,6 @@ if ($method == 'GET') {
     if($endpoint == '/transfer') {
         $jsonData = json_decode(file_get_contents('php://input'));
 
-        echo $endpoint;
-        die();
-
         $fromAccount = $jsonData->fromAccount ?? ($_POST['fromAccount'] ?? '');
         $toAccount = $jsonData->toAccount ?? ($_POST['toAccount'] ?? '');
         $amount = $jsonData->amount ?? ($_POST['amount'] ?? '');
