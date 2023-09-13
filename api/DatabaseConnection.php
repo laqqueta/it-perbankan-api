@@ -6,14 +6,14 @@ class DatabaseConnection {
     {
         try {
             $this->db = mysqli_init();
-            mysqli_options ($this->db, MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, true);
-
-            $this->db->ssl_set(
-                NULL,
-                NULL,
-                'ssl/DigiCertGlobalRootCA.crt.pem',
-                NULL,
-                NULL);
+//            mysqli_options ($this->db, MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, true);
+//
+//            $this->db->ssl_set(
+//                NULL,
+//                NULL,
+//                'ssl/DigiCertGlobalRootCA.crt.pem',
+//                NULL,
+//                NULL);
 
             mysqli_real_connect(
                 $this->db,
