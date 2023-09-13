@@ -6,7 +6,12 @@ header('Content-Type: application/json');
 
 $method = $_SERVER['REQUEST_METHOD'];
 $uri = explode('/', $_SERVER['REQUEST_URI']);
-$transaction = new Transactions();
+$path = $_SERVER['PATH_INFO'];
+
+echo $path;
+
+die();
+//$transaction = new Transactions();
 
 if ($method == 'GET') {
     $endpoint = $uri[count($uri) - 2];
