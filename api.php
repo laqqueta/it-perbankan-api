@@ -14,6 +14,10 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 $uri = $_SERVER['PATH_INFO'];
 
+echo $uri;
+
+die();
+
 $transaction = new Transactions();
 $account = new Account();
 
