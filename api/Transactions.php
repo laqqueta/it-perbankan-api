@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 require_once 'DatabaseConnection.php';
 class Transactions
 {
-    private $db;
+    private DatabaseConnection $db;
 
     public function __construct()
     {
@@ -18,7 +18,6 @@ class Transactions
         $result = $this->db->executeSelectQuery($query);
 
         if(is_null($result['result']) || $transferAmount < 0) {
-            echo '1';
             http_response_code(response_code: 500);
             echo json_encode(array(
                 'status' => '500',
@@ -32,7 +31,6 @@ class Transactions
 
         // check balance whether account balance is less than transfer amount or not
         if ($senderCurrentBalance < $transferAmount) {
-            echo '2';
             http_response_code(response_code: 200);
             echo json_encode(array(
                 'status' => 'warning',
@@ -47,7 +45,6 @@ class Transactions
         $result = $this->db->executeUpdateQuery($query);
         
         if(is_null($result['result'])) {
-            echo '3';
             http_response_code(response_code: 500);
             echo json_encode(array(
                 'status' => '500',

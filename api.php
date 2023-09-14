@@ -44,16 +44,11 @@ switch ($method) {
         if($endpoint == 'transfer') {
             $jsonData = json_decode(file_get_contents('php://input'));
 
-            $fromAccount = $jsonData->fromAccount ?? '';
-            $toAccount = $jsonData->toAccount ?? '';
-            $amount = $jsonData->amount ?? '';
-
-            foreach ($jsonData as $data) {
-                echo $data . ' ';
-            }
+            $fromAccount = $jsonData->fromAccount ?? ($_POST['fromAccount'] ?? '');
+            $toAccount = $jsonData->toAccount ?? ($_POST['toAccount'] ?? '');
+            $amount = $jsonData->amount ?? ($_POST['amount'] ?? '');
 
             if(!empty($fromAccount) && !empty($toAccount) && !empty($amount)) {
-                echo 'processed';
                 $uri_processed = true;
                 $transaction->transferMoney($fromAccount, $toAccount, $amount);
             }
