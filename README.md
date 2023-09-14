@@ -2,7 +2,7 @@
 
 ---
 
-* [API link](ttps://it-perbankan-api.azurewebsites.net)
+[API link](ttps://it-perbankan-api.azurewebsites.net)
 
 #### API Method
 1. Get Account Balance
