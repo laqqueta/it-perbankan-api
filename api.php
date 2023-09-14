@@ -11,7 +11,7 @@ $transaction = new Transactions();
 $account = new Account();
 
 if ($method == 'GET') {
-    if (count($uri) <= 1) {
+    if (count($uri) < 3) {
         http_response_code(500);
         echo json_encode(['error' => 'Internal Server Error']);
         die();
