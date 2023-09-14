@@ -11,9 +11,10 @@ $transaction = new Transactions();
 $account = new Account();
 
 if ($method == 'GET') {
+    echo count($uri);
     if (count($uri) <= 2) {
         http_response_code(500);
-        echo json_encode(['error' => 'Internal Server Error']);
+        echo json_encode(['error' => 'Internal Server Error [Validate request URI]']);
         die();
     }
 
@@ -28,7 +29,7 @@ if ($method == 'GET') {
         echo 'endpoingt: transactions';
     } else {
         http_response_code(404);
-        echo json_encode(['error' => 'Not Found']);
+        echo json_encode(['error' => 'Not Found [GET endpoint]']);
     }
 } elseif ($method == 'POST') {
     $endpoint = $uri[count($uri) - 1];
@@ -44,13 +45,13 @@ if ($method == 'GET') {
             $transaction->transferMoney($fromAccount, $toAccount, $amount);
         } else {
             http_response_code(500);
-            echo json_encode(['error' => 'Internal Server Error']);
+            echo json_encode(['error' => 'Internal Server Error [Validate amount]']);
         }
     } else {
         http_response_code(404);
-        echo json_encode(['error' => 'Not Found']);
+        echo json_encode(['error' => 'Not Found [POST endpoint]']);
     }
 } else {
     http_response_code(404);
-    echo json_encode(['error' => 'Not Found']);
+    echo json_encode(['error' => 'Not Found [NO METHOD]']);
 }
