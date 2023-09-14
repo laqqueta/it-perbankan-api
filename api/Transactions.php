@@ -21,7 +21,7 @@ class Transactions
             http_response_code(response_code: 500);
             echo json_encode(array(
                 'status' => '500',
-                'message' => 'Internal Server Error.',
+                'message' => 'Internal Server Error',
             ), JSON_PRETTY_PRINT);
             die();
         }
@@ -31,9 +31,9 @@ class Transactions
 
         // check balance whether account balance is less than transfer amount or not
         if ($senderCurrentBalance < $transferAmount) {
-            http_response_code(response_code: 200);
+            http_response_code(response_code: 400);
             echo json_encode(array(
-                'status' => 'warning',
+                'status' => '400',
                 'message' => 'Account balance is less than transfer amount.',
             ), JSON_PRETTY_PRINT);
             die();
@@ -48,7 +48,7 @@ class Transactions
             http_response_code(response_code: 500);
             echo json_encode(array(
                 'status' => '500',
-                'message' => 'Something went wrong.'
+                'message' => 'Internal Server Error.'
             ), JSON_PRETTY_PRINT);
             die();
         }
@@ -93,7 +93,7 @@ class Transactions
             http_response_code(response_code: 500);
             echo json_encode(array(
                 'status' => '500',
-                'message' => 'Something went wrong. (Insert)'
+                'message' => 'Internal Server Error'
             ), JSON_PRETTY_PRINT);
         }
     }
