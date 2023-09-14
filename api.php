@@ -11,7 +11,6 @@ $transaction = new Transactions();
 $account = new Account();
 
 if ($method == 'GET') {
-    echo count($uri);
     if (count($uri) <= 3) {
         http_response_code(500);
         echo json_encode(['error' => 'Internal Server Error [Validate request URI]']);
