@@ -8,8 +8,6 @@ $method = $_SERVER['REQUEST_METHOD'];
 $uri = explode('/', $_SERVER['REQUEST_URI']);
 $uri_processed = false;
 
-$path = $_SERVER['PATH_INFO'];
-
 $transaction = new Transactions();
 $account = new Account();
 
@@ -21,11 +19,6 @@ switch ($method) {
 
         $endpoint = $uri[count($uri) - 2];
         $account_id = $uri[count($uri) - 1];
-
-        echo $path;
-
-        if ($path == '/test')
-            echo 'got it';
 
         if ($endpoint == 'balance' && !empty($account_id)) {
             $uri_processed = true;
