@@ -11,7 +11,7 @@ $transaction = new Transactions();
 $account = new Account();
 
 if ($method == 'GET') {
-    if (count($uri) < 2) {
+    if (count($uri) <= 1) {
         http_response_code(500);
         echo json_encode(['error' => 'Internal Server Error']);
         die();
@@ -21,9 +21,11 @@ if ($method == 'GET') {
     $account_id = $uri[count($uri) - 1];
 
     if ($endpoint == 'balance' && !empty($account_id)) {
-        $account->getAccountBalance($account_id);
+//        $account->getAccountBalance($account_id);
+        echo 'endpoingt: balance';
     } elseif ($endpoint == 'transactions' && !empty($account_id)) {
-        $transaction->getTransactionHistory($account_id);
+//        $transaction->getTransactionHistory($account_id);
+        echo 'endpoingt: transactions';
     } else {
         http_response_code(404);
         echo json_encode(['error' => 'Not Found']);
