@@ -12,7 +12,7 @@ $account = new Account();
 
 if ($method == 'GET') {
     echo count($uri);
-    if (count($uri) <= 2) {
+    if (count($uri) <= 3) {
         http_response_code(500);
         echo json_encode(['error' => 'Internal Server Error [Validate request URI]']);
         die();
@@ -22,11 +22,19 @@ if ($method == 'GET') {
     $account_id = $uri[count($uri) - 1];
 
     if ($endpoint == 'balance' && !empty($account_id)) {
-//        $account->getAccountBalance($account_id);
-        echo 'endpoingt: balance';
+        http_response_code(200);
+        echo json_encode(array(
+            'status' => '200',
+            'endpoing' => 'balance',
+        ), JSON_PRETTY_PRINT);
+        //$account->getAccountBalance($account_id);
     } elseif ($endpoint == 'transactions' && !empty($account_id)) {
-//        $transaction->getTransactionHistory($account_id);
-        echo 'endpoingt: transactions';
+        //$transaction->getTransactionHistory($account_id);
+        http_response_code(200);
+        echo json_encode(array(
+            'status' => '200',
+            'endpoing' => 'transactions',
+        ), JSON_PRETTY_PRINT);
     } else {
         http_response_code(404);
         echo json_encode(['error' => 'Not Found [GET endpoint]']);
