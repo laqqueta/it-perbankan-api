@@ -42,7 +42,6 @@ switch ($method) {
         $endpoint = $uri[count($uri) - 1];
         echo $endpoint;
         if($endpoint == 'transfer') {
-            echo 'transfer';
             $jsonData = json_decode(file_get_contents('php://input'));
 
             $fromAccount = $jsonData->fromAccount ?? '';
@@ -50,6 +49,7 @@ switch ($method) {
             $amount = $jsonData->amount ?? '';
 
             if(!empty($fromAccount) && !empty($toAccount) && !empty($amount)) {
+                echo 'processed';
                 $uri_processed = true;
                 $transaction->transferMoney($fromAccount, $toAccount, $amount);
             }
