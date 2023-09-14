@@ -48,6 +48,10 @@ switch ($method) {
             $toAccount = $jsonData->toAccount ?? '';
             $amount = $jsonData->amount ?? '';
 
+            foreach ($jsonData as $data) {
+                echo $data . ' ';
+            }
+
             if(!empty($fromAccount) && !empty($toAccount) && !empty($amount)) {
                 echo 'processed';
                 $uri_processed = true;
