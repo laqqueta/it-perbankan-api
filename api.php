@@ -4,13 +4,14 @@ header('Content-Type: application/json');
 require_once 'api/Account.php';
 require_once 'api/Transactions.php';
 
+$method = $_SERVER['REQUEST_METHOD'];
 $uri = explode('/', $_SERVER['REQUEST_URI']);
 $uri_processed = false;
 
 $transaction = new Transactions();
 $account = new Account();
 
-switch ($_SERVER['REQUEST_METHOD']) {
+switch ($method) {
     case 'GET':
         if (count($uri) <= 3) {
             break;
@@ -39,8 +40,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
         break;
     case 'POST':
         $endpoint = $uri[count($uri) - 1];
-
+        echo $endpoint;
         if($endpoint == 'transfer') {
+            echo 'transfer';
             $jsonData = json_decode(file_get_contents('php://input'));
 
             $fromAccount = $jsonData->fromAccount ?? '';
