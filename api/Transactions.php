@@ -79,7 +79,8 @@ class Transactions
 
     }
 
-    private function updateTransactionHistory($fromAccount, $toAccount, $transferAmount, $date, $time) {
+    private function updateTransactionHistory($fromAccount, $toAccount, $transferAmount, $date, $time): void
+    {
         $arrayQuery = array(
             "INSERT INTO transfer (fromAccount) VALUES ($fromAccount)",
             "SET @last_id = LAST_INSERT_ID()",
