@@ -40,7 +40,6 @@ switch ($method) {
         break;
     case 'POST':
         $endpoint = $uri[count($uri) - 1];
-        echo $endpoint;
         if($endpoint == 'transfer') {
             $jsonData = json_decode(file_get_contents('php://input'));
 
@@ -57,6 +56,9 @@ switch ($method) {
 }
 
 if(!$uri_processed) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Bad Request']);
+    http_response_code(404);
+    echo json_encode(array(
+        'status' => '404',
+        'masssage' => 'Not Found',
+    ), JSON_PRETTY_PRINT);
 }
