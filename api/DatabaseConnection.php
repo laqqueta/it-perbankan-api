@@ -17,10 +17,10 @@ class DatabaseConnection {
 
             mysqli_real_connect(
                 $this->db,
-                'it-perbankan-api.mysql.database.azure.com',
-                'apiadmin',
-                '5perbankan@',
-                'perbankan_api',
+                'it-perbankan-api.mysql.database.azure.com', // DB HOST
+                'apiadmin', // DB USERNAME
+                '5perbankan@', // DB PASSWORD
+                'perbankan_api', // Database
                 3306,
             );
         } catch (Exception $err) {
