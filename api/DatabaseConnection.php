@@ -59,10 +59,10 @@ class DatabaseConnection {
             return $status ? array('result' => 'successful') : array('result' => NULL);
         } catch (Exception $err) {
             header('Content-Type: application/json');
-            http_response_code(response_code: 500);
+            http_response_code(response_code: 400);
 
             echo json_encode(array(
-                'status' => 'Internal Server Error',
+                'status' => 'Bad Request',
                 'message' => $err->getMessage(),
             ), JSON_PRETTY_PRINT);
             $this->db->close();
@@ -78,10 +78,10 @@ class DatabaseConnection {
             return $status ? array('result' => 'successful') : array('result' => NULL);
         } catch (Exception $err) {
             header('Content-Type: application/json');
-            http_response_code(response_code: 500);
+            http_response_code(response_code: 400);
 
             echo json_encode(array(
-                'status' => 'Internal Server Error',
+                'status' => 'Bad Request',
                 'message' => $err->getMessage(),
             ), JSON_PRETTY_PRINT);
             $this->db->close();
@@ -100,14 +100,18 @@ class DatabaseConnection {
             return count($rows) < 1 ? array('result' => NULL) : array('result' => $rows);
         } catch (Exception $err) {
             header('Content-Type: application/json');
-            http_response_code(response_code: 500);
+            http_response_code(response_code: 400);
 
             echo json_encode(array(
-                'status' => 'Internal Server Error',
+                'status' => 'Bad Request',
                 'message' => $err->getMessage(),
             ), JSON_PRETTY_PRINT);
             $this->db->close();
             die();
         }
+    }
+
+    public function closeConnection() : void {
+        $this->db->close();
     }
 }

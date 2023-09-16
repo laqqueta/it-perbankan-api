@@ -20,9 +20,10 @@ class Transactions
         if(is_null($result['result']) || $transferAmount < 0) {
             http_response_code(response_code: 500);
             echo json_encode(array(
-                'status' => '500',
-                'message' => 'Internal Server Error',
+                'status' => '400',
+                'message' => 'Bad Request',
             ), JSON_PRETTY_PRINT);
+            $this->db->closeConnection();
             die();
         }
         
@@ -36,6 +37,7 @@ class Transactions
                 'status' => '400',
                 'message' => 'Account balance is less than transfer amount.',
             ), JSON_PRETTY_PRINT);
+            $this->db->closeConnection();
             die();
         }
         
@@ -45,11 +47,12 @@ class Transactions
         $result = $this->db->executeUpdateQuery($query);
         
         if(is_null($result['result'])) {
-            http_response_code(response_code: 500);
+            http_response_code(response_code: 400);
             echo json_encode(array(
-                'status' => '500',
-                'message' => 'Internal Server Error.'
+                'status' => '400',
+                'message' => 'Bad Request'
             ), JSON_PRETTY_PRINT);
+            $this->db->closeConnection();
             die();
         }
 
@@ -66,6 +69,8 @@ class Transactions
             'time' => $time,
             'message' => 'Transfer to account ' . $toAccount . ' successful.'
         ), JSON_PRETTY_PRINT);
+
+        $this->db->closeConnection();
     }
 
     // Function to retrieve transaction history for an account
@@ -90,11 +95,12 @@ class Transactions
         $result = $this->db->executeInsertQuery($arrayQuery);
 
         if(is_null($result['result'])) {
-            http_response_code(response_code: 500);
+            http_response_code(response_code: 400);
             echo json_encode(array(
-                'status' => '500',
-                'message' => 'Internal Server Error'
+                'status' => '400',
+                'message' => 'Bad Request'
             ), JSON_PRETTY_PRINT);
+            die();
         }
     }
 }
