@@ -76,12 +76,62 @@ class Transactions
     // Function to retrieve transaction history for an account
     public function getTransactionHistory($accountID): void
     {
+        $query = "SELECT * FROM transfer_detail WHERE account_id = ?";
+        $params = [$accountID];
 
+        try {
+            $result = $this->db->executeSelectQuery($query, $params);
+            if (!empty($result['result'])) {
+                http_response_code(200);
+                echo json_encode(array(
+                    'status' => '200',
+                    'transactions' => $result['result'],
+                ), JSON_PRETTY_PRINT);
+            } else {
+                http_response_code(404);
+                echo json_encode(array(
+                    'status' => '404',
+                    'message' => 'No transaction history found for the account.',
+                ), JSON_PRETTY_PRINT);
+            }
+        } catch (Exception $err) {
+            // Tangani kesalahan
+            http_response_code(500);
+            echo json_encode(array(
+                'status' => '500',
+                'message' => 'Internal Server Error',
+            ), JSON_PRETTY_PRINT);
+        }
     }
 
     // Function to retrieve transaction history from specific user for an account
-    public function getTransactionsHistoryFromUser($accountID, $fromUser) {
+    public function getTransactionsHistoryFromUser($accountID, $fromUser) 
+    {
+        $query = "SELECT * FROM transfer_detail WHERE account_id = ? AND fromAccount = ?";
+        $params = [$accountID, $fromUser];
 
+        try {
+            $result = $this->db->executeSelectQuery($query, $params);
+            if (!empty($result['result'])) {
+                http_response_code(200);
+                echo json_encode(array(
+                    'status' => '200',
+                    'transactions' => $result['result'],
+                ), JSON_PRETTY_PRINT);
+            } else {
+                http_response_code(404);
+                echo json_encode(array(
+                    'status' => '404',
+                    'message' => 'No transaction history found for the account from the specified user.',
+                ), JSON_PRETTY_PRINT);
+            }
+        } catch (Exception $err) {
+            http_response_code(500);
+            echo json_encode(array(
+                'status' => '500',
+                'message' => 'Internal Server Error',
+            ), JSON_PRETTY_PRINT);
+        }
     }
 
     private function updateTransactionHistory($fromAccount, $toAccount, $transferAmount, $date, $time): void
