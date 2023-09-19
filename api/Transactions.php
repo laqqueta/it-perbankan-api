@@ -76,11 +76,11 @@ class Transactions
     // Function to retrieve transaction history for an account
     public function getTransactionHistory($accountID): void
     {
-        $query = "SELECT * FROM transfer_detail WHERE account_id = ?";
-        $params = [$accountID];
+        $query = "SELECT * FROM transfer_detail WHERE account_id = $accountID";
+        $result = $this->db->executeUpdateQuery($query);
 
         try {
-            $result = $this->db->executeSelectQuery($query, $params);
+            $result = $this->db->executeSelectQuery($query, $result);
             if (!empty($result['result'])) {
                 http_response_code(200);
                 echo json_encode(array(

@@ -13,7 +13,20 @@ class Account {
     // Function to retrieve account balance
     public function getAccountBalance($accountID)
     {
+        $query = "SELECT balance FROM user WHERE account_id = $accountID";
+        $result = $this->db->executeUpdateQuery($query);
 
+        try {
+            $result = $this->db->executeSelectQuery($query, $result);
+            if (!empty($result['result'])) {
+                return $result['result'][0]['balance'];
+            } else {
+                return null; // Account not found
+            }
+        } catch (Exception $err) {
+            // Handle errors here
+            return null;
+        }
     }
 
     public function getAccountProfile($accountID)

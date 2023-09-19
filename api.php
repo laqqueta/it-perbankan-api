@@ -22,12 +22,24 @@ switch ($method) {
 
         if ($endpoint == 'balance' && !empty($account_id)) {
             $uri_processed = true;
-            http_response_code(200);
-            echo json_encode(array(
-                'status' => '200',
-                'endpoing' => 'balance',
-            ), JSON_PRETTY_PRINT);
-            //$account->getAccountBalance($account_id);
+            $balance = $account->getAccountBalance($account_id);
+
+            if ($balance !== null) {
+                http_response_code(200);
+                echo json_encode(array(
+                    'account ID' => $account_id,
+                    'balance' => $balance,
+                    'status' => '200',
+                    'endpoint' => 'balance',
+                ), JSON_PRETTY_PRINT);
+            } else {
+                http_response_code(404);
+                echo json_encode(array(
+                    'status' => '404',
+                    'message' => 'Account not found',
+                ), JSON_PRETTY_PRINT);
+            }
+
         } elseif ($endpoint == 'transactions' && !empty($account_id)) {
             $uri_processed = true;
             //$transaction->getTransactionHistory($account_id);
@@ -38,6 +50,7 @@ switch ($method) {
             ), JSON_PRETTY_PRINT);
         }
         break;
+        
     case 'POST':
         $endpoint = $uri[count($uri) - 1];
         if($endpoint == 'transfer') {
