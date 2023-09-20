@@ -24,9 +24,11 @@ class Account {
                 return null;
             }
         } catch (Exception $err) {
-            // Handle errors here
+            error_log("Error in getAccountBalance: " . $err->getMessage());
             return null;
         }
+
+        
     }
 
     public function getAccountProfile($accountID)
