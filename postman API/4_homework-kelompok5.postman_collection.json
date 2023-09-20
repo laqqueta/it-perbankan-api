@@ -1,0 +1,32 @@
+{
+	"info": {
+		"_postman_id": "14d1600d-095c-4fcc-abfa-e90c7b240ccf",
+		"name": "4_homework-kelompok5",
+		"description": "menampilkan transaksi history",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29771635"
+	},
+	"item": [
+		{
+			"name": "localhost/rakamin/it-perbankan-api/api.php/transactions/3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/rakamin/it-perbankan-api/api.php/transactions/3",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rakamin",
+						"it-perbankan-api",
+						"api.php",
+						"transactions",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
