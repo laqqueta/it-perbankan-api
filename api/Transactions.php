@@ -74,33 +74,22 @@ class Transactions
     }
 
     // Function to retrieve transaction history for an account
-    public function getTransactionHistory($accountID): void
+    public function getTransactionHistory($accountID): array
     {
         $query = "SELECT * FROM transfer_detail WHERE account_id = $accountID";
-        $result = $this->db->executeUpdateQuery($query);
+        $result = $this->db->executeSelectQuery($query);
 
         try {
             $result = $this->db->executeSelectQuery($query, $result);
             if (!empty($result['result'])) {
-                http_response_code(200);
-                echo json_encode(array(
-                    'status' => '200',
-                    'transactions' => $result['result'],
-                ), JSON_PRETTY_PRINT);
+                return $result['result'];
             } else {
-                http_response_code(404);
-                echo json_encode(array(
-                    'status' => '404',
-                    'message' => 'No transaction history found for the account.',
-                ), JSON_PRETTY_PRINT);
+                return []; // No transaction history found for the account
             }
         } catch (Exception $err) {
-            // Tangani kesalahan
-            http_response_code(500);
-            echo json_encode(array(
-                'status' => '500',
-                'message' => 'Internal Server Error',
-            ), JSON_PRETTY_PRINT);
+            // Handle errors here, for example, log the error
+            error_log("Error in getTransactionHistory: " . $err->getMessage());
+            return []; // Return an empty array in case of errors
         }
     }
 

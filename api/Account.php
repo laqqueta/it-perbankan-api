@@ -14,14 +14,14 @@ class Account {
     public function getAccountBalance($accountID)
     {
         $query = "SELECT balance FROM user WHERE account_id = $accountID";
-        $result = $this->db->executeUpdateQuery($query);
+        $result = $this->db->executeSelectQuery($query);
 
         try {
             $result = $this->db->executeSelectQuery($query, $result);
             if (!empty($result['result'])) {
                 return $result['result'][0]['balance'];
             } else {
-                return null; // Account not found
+                return null;
             }
         } catch (Exception $err) {
             // Handle errors here
