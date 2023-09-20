@@ -74,13 +74,27 @@ class Transactions
     }
 
     // Function to retrieve transaction history for an account
-    public function getTransactionHistory($accountID): void
+    public function getTransactionHistory($accountID): array
     {
+        $query = "SELECT * FROM transfer_detail WHERE account_id = $accountID";
+        $result = $this->db->executeSelectQuery($query);
 
+        try {
+            $result = $this->db->executeSelectQuery($query, $result);
+            if (!empty($result['result'])) {
+                return $result['result'];
+            } else {
+                return [];
+            }
+        } catch (Exception $err) {
+            error_log("Error in getTransactionHistory: " . $err->getMessage());
+            return [];
+        }
     }
 
     // Function to retrieve transaction history from specific user for an account
-    public function getTransactionsHistoryFromUser($accountID, $fromUser) {
+    public function getTransactionsHistoryFromUser($accountID, $fromUser) 
+    {
 
     }
 
